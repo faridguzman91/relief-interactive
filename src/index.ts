@@ -12,6 +12,11 @@ import {
   Scene,
   WebGPURenderer,
 } from "three/webgpu";
+import model from "@/assets/relief.glb"
+import * as THREE from 'three'
+import { DRACOLoader } from "three/examples/jsm/Addons.js";
+import { GLTFLoader } from "three/examples/jsm/Addons.js";
+
 
 const sketch: Sketch<"webgpu"> = async ({
   wrap,
@@ -41,6 +46,21 @@ const sketch: Sketch<"webgpu"> = async ({
   document.body.appendChild(stats.dom);
 
   const scene = new Scene();
+
+  //start of code
+  const dracoLoader = new DRACOLoader()
+
+  dracoLoader.setDecoderPath('')
+
+  const gltfLoader = new GLTFLoader()
+
+  gltfLoader.setDRACOLoader(dracoLoader)
+
+  const loader = new GLTFLoader()
+  loader.load(model, (gltf) => {
+    const model = gltf.scene;
+    scene.add(model)
+  })
 
   const geometry = new BoxGeometry(1, 1, 1);
   const material = new NodeMaterial();
@@ -72,13 +92,13 @@ const sketch: Sketch<"webgpu"> = async ({
 
 const settings: SketchSettings = {
   mode: "webgpu",
-  // dimensions: [800, 800],
+  dimensions: [800, 800],
   pixelRatio: window.devicePixelRatio,
   animate: true,
   duration: 6_000,
   playFps: 60,
   exportFps: 60,
-  framesFormat: ["webm"],
+  framesFormat: ["mp4"],
 };
 
 ssam(sketch, settings);
