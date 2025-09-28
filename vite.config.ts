@@ -16,6 +16,7 @@ export default defineConfig({
     ssamGit(),
     // ssamTimelapse(),
   ],
+  assetsInclude: ['**/*.glb'],
   clearScreen: false,
   build: {
     outDir: "./dist",

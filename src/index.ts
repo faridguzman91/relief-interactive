@@ -12,10 +12,10 @@ import {
   Scene,
   WebGPURenderer,
 } from "three/webgpu";
-import model from "@/assets/relief.glb"
+import model from "./assets/relief.glb"
 import * as THREE from 'three'
-import { DRACOLoader } from "three/examples/jsm/Addons.js";
-import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 
 const sketch: Sketch<"webgpu"> = async ({
@@ -50,7 +50,7 @@ const sketch: Sketch<"webgpu"> = async ({
   //start of code
   const dracoLoader = new DRACOLoader()
 
-  dracoLoader.setDecoderPath('')
+  dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
 
   const gltfLoader = new GLTFLoader()
 
@@ -62,17 +62,10 @@ const sketch: Sketch<"webgpu"> = async ({
     scene.add(model)
   })
 
-  const geometry = new BoxGeometry(1, 1, 1);
-  const material = new NodeMaterial();
-  material.colorNode = Fn(() => {
-    return vec4(normalLocal, 1);
-  })();
-  const mesh = new Mesh(geometry, material);
-  scene.add(mesh);
+
 
   wrap.render = ({ playhead }) => {
-    mesh.rotation.x = playhead * Math.PI * 2;
-    mesh.rotation.y = playhead * Math.PI * 2;
+
 
     controls.update();
     stats.update();
