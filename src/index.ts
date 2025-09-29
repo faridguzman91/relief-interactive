@@ -83,10 +83,12 @@ const sketch: Sketch<"webgpu"> = async ({
     let mouseY = -(e.clientY / height) * 2 + 1;
     raycaster.setFromCamera(new THREE.Vector2(mouseX, mouseY), camera);
     const intersects = raycaster.intersectObjects([dummy]);
-    // mouse2D.set(e.clientX,e.clientY);
+
+    //activate mouse 
+    mouse2D.set(e.clientX,e.clientY);
     if (intersects.length > 0) {
-      // console.log(intersects[0].point);
-      // uMouse.value.copy(intersects[0].point);
+      console.log(intersects[0].point);
+      uMouse.value.copy(intersects[0].point);
     }
   });
 
