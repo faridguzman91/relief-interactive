@@ -50,4 +50,26 @@ export class TrailCanvas {
       this.ctx.restore()
     }
   }
+
+  getTexture() {
+    return this.canvas
+  }
+//faridguzman91 - method to get canvas data URL
+  getDataURL() {
+    return this.canvas.toDataURL();
+  }
+
+  clear() {
+    this.ctx.fillStyle = 'black'
+    this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height)
+  }
+
+
+  setFadeSpeed(alpha) {
+    this.fadeAlpha = Math.max(0, Math.min(1, alpha))
+  }
+
+  setCircleRadius(radius) {
+    this.circleRadius = radius
+  }
 }
