@@ -85,7 +85,7 @@ const sketch: Sketch<"webgpu"> = async ({
 
 const settings: SketchSettings = {
   mode: "webgpu",
-  dimensions: [800, 800],
+  //dimensions: [800, 800],
   pixelRatio: window.devicePixelRatio,
   animate: true,
   duration: 6_000,
